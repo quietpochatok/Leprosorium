@@ -10,28 +10,35 @@ def init_db
 
 end
 
+#вызывается каждый раз при перезагрузке сайт/страницы
 before do
 init_db
+# инициализация БД
 end
 
+# вызывается каждый раз при конфигурации приложения
+# когда изменился код программы и перезагрузка страницы
 configure do
+	инициализация БД
 	init_db
-@db.execute 'CREATE TABLE IF NOT EXISTS "Posts" (
+	# создает таблицу если она не суще-етб также не пересоздает таблицу
+	@db.execute 'CREATE TABLE IF NOT EXISTS "Posts" (
 	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	"create_date"	INTEGER NOT NULL,
 	"content"	TEXT NOT NULL
-)'
+	)'
 end
 
 get '/' do
 	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"			
 end
+# обработчик get-запроса /newPost
 get '/newPost' do
 erb :newPost
 end
-
+# обработчик пост-запроса /newPost
 post '/newPost' do
-	
+	# получаем данные из пост запроса через переменную
 post = params[:postUser]
 erb "you taped: #{post}"
 end
