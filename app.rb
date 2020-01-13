@@ -19,7 +19,7 @@ end
 # вызывается каждый раз при конфигурации приложения
 # когда изменился код программы и перезагрузка страницы
 configure do
-	инициализация БД
+	# инициализация БД
 	init_db
 	# создает таблицу если она не суще-етб также не пересоздает таблицу
 	@db.execute 'CREATE TABLE IF NOT EXISTS "Posts" (
@@ -37,9 +37,14 @@ get '/newPost' do
 erb :newPost
 end
 # обработчик пост-запроса /newPost
+
 post '/newPost' do
 	# получаем данные из пост запроса через переменную
 post = params[:postUser]
+if post.size <= 0
+	@error = 'Input form text!'
 erb "you taped: #{post}"
+return erb :newPost
+end
 end
 
