@@ -9,3 +9,10 @@ end
 get '/newPost' do
 erb :newPost
 end
+
+post '/newPost' do
+	
+post = params[:postUser]
+erb "you taped: #{post}"
+end
+
