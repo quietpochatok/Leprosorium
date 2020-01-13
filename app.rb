@@ -10,9 +10,17 @@ def init_db
 
 end
 
-
 before do
 init_db
+end
+
+configure do
+	init_db
+@db.execute 'CREATE TABLE IF NOT EXISTS "Posts" (
+	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	"create_date"	INTEGER NOT NULL,
+	"content"	TEXT NOT NULL
+)'
 end
 
 get '/' do
