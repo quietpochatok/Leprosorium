@@ -30,7 +30,7 @@ configure do
 end
 
 get '/' do
-	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"			
+	erb :lastPost
 end
 # обработчик get-запроса /newPost
 get '/newPost' do
@@ -43,14 +43,14 @@ post '/newPost' do
 # получаем данные из пост запроса через переменную
 post = params[:postUser]
 
-if post.size <= 0
-	@error = 'Input form text!'
-	
-return erb :newPost
-end
-@db.execute 'insert into Posts (create_date,
+			if post.size <= 0
+				@error = 'Input form text!'
+				
+			return erb :newPost
+			end
+	@db.execute 'insert into Posts (create_date,
 	
 							content) values (datetime(), ?)', [post]
-erb "you taped: #{post}"
+	erb "you taped: #{post}"
 end
 
