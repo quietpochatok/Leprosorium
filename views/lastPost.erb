@@ -1,4 +1,10 @@
 <h2>Last posts</h2>
-<%@posts.each do |postsText|  %>
-<p><%=postsText['content']%></p>
+<br>
+	<%@posts.each do |postsColumn|%>
+	<p><%=postsColumn['content']%>
+		<br>
+		<br>
+		Added at: <%=postsColumn['create_date']%>
+	</p>
+	<hr/>
  <% end %>
