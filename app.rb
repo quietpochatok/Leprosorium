@@ -30,14 +30,17 @@ configure do
 end
 
 get '/' do
+	@posts = @db.execute 'select * from Posts order by id desc'
 	erb :lastPost
 end
+
+
 # обработчик get-запроса /newPost
 get '/newPost' do
 erb :newPost
 end
-# обработчик пост-запроса /newPost
 
+# обработчик пост-запроса /newPost
 post '/newPost' do
 
 # получаем данные из пост запроса через переменную

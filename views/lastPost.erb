@@ -1,1 +1,4 @@
 <h2>Last posts</h2>
+<%@posts.each do |postsText|  %>
+<p><%=postsText['content']%></p>
+ <% end %>
