@@ -3,6 +3,8 @@
 	<%@posts.each do |postsColumn|%>
 	<p><%=postsColumn['content']%>
 		<br>
+		<a href="/post/<%=postsColumn['id']%>">Comments</a>
+		<br>
 		<br>
 		Added at: <%=postsColumn['create_date']%>
 	</p>
