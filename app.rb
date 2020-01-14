@@ -24,7 +24,7 @@ configure do
 	# создает таблицу если она не суще-етб также не пересоздает таблицу
 	@db.execute 'CREATE TABLE IF NOT EXISTS "Posts" (
 	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	"create_date"	INTEGER NOT NULL,
+	"create_date"	DATE NOT NULL,
 	"content"	TEXT NOT NULL
 	)'
 end
@@ -39,12 +39,18 @@ end
 # обработчик пост-запроса /newPost
 
 post '/newPost' do
-	# получаем данные из пост запроса через переменную
+
+# получаем данные из пост запроса через переменную
 post = params[:postUser]
+
 if post.size <= 0
 	@error = 'Input form text!'
-erb "you taped: #{post}"
+	
 return erb :newPost
 end
+@db.execute 'insert into Posts (create_date,
+	
+							content) values (datetime(), ?)', [post]
+erb "you taped: #{post}"
 end
 
