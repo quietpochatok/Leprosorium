@@ -37,23 +37,22 @@ end
 
 # обработчик get-запроса /newPost
 get '/newPost' do
-erb :newPost
+	erb :newPost
 end
 
 # обработчик пост-запроса /newPost
 post '/newPost' do
 
-# получаем данные из пост запроса через переменную
-post = params[:postUser]
+	# получаем данные из пост запроса через переменную
+	post = params[:postUser]
 
 			if post.size <= 0
-				@error = 'Input form text!'
-				
+			@error = 'Input form text or noop!'			
 			return erb :newPost
 			end
-	@db.execute 'insert into Posts (create_date,
 	
-							content) values (datetime(), ?)', [post]
-	erb "you taped: #{post}"
+	@db.execute 'insert into Posts (create_date,content) values (datetime(), ?)', [post]
+					
+	redirect '/'
 end
 
