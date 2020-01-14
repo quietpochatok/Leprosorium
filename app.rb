@@ -56,3 +56,7 @@ post '/newPost' do
 	redirect '/'
 end
 
+get '/post/:id' do
+	postID = params[:id]
+	erb "inf id #{postID}"
+end
