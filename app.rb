@@ -27,6 +27,14 @@ configure do
 	"create_date"	DATE NOT NULL,
 	"content"	TEXT NOT NULL
 	)'
+
+	# создает таблицу если она не суще-етб также не пересоздает таблицу
+	@db.execute 'CREATE TABLE IF NOT EXISTS "Comments" (
+	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	"create_date"	DATE NOT NULL,
+	"content"	TEXT NOT NULL,
+	"postID" INTEGER
+	)'
 end
 
 get '/' do
@@ -72,7 +80,7 @@ end
 #обработчик пост запроса, где находится пост
 post '/detail_post/:id' do
 
-# получаем значение переменной из урл
+	# получаем значение переменной из урл
 	postID = params[:id]
 
 	# получаем данные из пост запроса через переменную
