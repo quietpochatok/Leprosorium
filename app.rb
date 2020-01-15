@@ -68,3 +68,16 @@ get '/post/:id' do
 	# erb "inf id #{postID}"
 
 end
+
+#обработчик пост запроса, где находится пост
+post '/detail_post/:id' do
+
+# получаем значение переменной из урл
+	postID = params[:id]
+
+	# получаем данные из пост запроса через переменную
+	post = params[:postUser]
+
+	erb "#{post} , #{postID}"
+
+end
