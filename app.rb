@@ -86,6 +86,9 @@ post '/detail_post/:id' do
 	# получаем данные из пост запроса через переменную
 	post = params[:postUser]
 
+	@db.execute 'insert into Comments (create_date,content,postID) 
+					values (datetime(), ?,?)', [post, postID]
+	
 	erb "#{post} , #{postID}"
 
 end
