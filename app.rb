@@ -71,6 +71,9 @@ get '/post/:id' do
 	detailPost = @db.execute 'select * from Posts where id =?',[postID]
 	# пост переходит в переменную глобальную
 	@row = detailPost[0]
+	
+	#
+	@comments = @db.execute 'select * from Comments where postID=? order by id', [postID]
 	erb :detail_post
 
 	# erb "inf id #{postID}"
@@ -89,6 +92,6 @@ post '/detail_post/:id' do
 	@db.execute 'insert into Comments (create_date,content,postID) 
 					values (datetime(), ?,?)', [post, postID]
 	
-	erb "#{post} , #{postID}"
+	redirect('/post/'+ postID)
 
 end
