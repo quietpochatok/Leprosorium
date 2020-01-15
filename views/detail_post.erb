@@ -7,5 +7,15 @@
 		<br>
 		Added at: <%=@row['create_date']%>
 	</p>
-
 	<hr/>
+
+	<h3>Comments:</h3>
+	<p>	
+		<!-- здесь происходит подставка в урл через хэш с помощью ключа id -->
+<form action="/detail_post/<%=@row['id']%>" method="POST" role="form">
+  <div class="form-group">
+   <textarea name="postUser" class="form-control" rows="10" placeholder="Into you comment there"></textarea>
+   <br>
+  <button type="submit" class="btn btn-primary">Add comment</button>
+</form>
+	</p>

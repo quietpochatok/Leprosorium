@@ -47,7 +47,7 @@ post '/newPost' do
 	post = params[:postUser]
 
 			if post.size <= 0
-			@error = 'Input form text or noop!'			
+			@error = 'Input form text or get away!'			
 			return erb :newPost
 			end
 	
@@ -57,8 +57,11 @@ post '/newPost' do
 end
 #вывод информации о посте
 get '/post/:id' do
+	# получаем значение переменной из урл
 	postID = params[:id]
+	# вывод постов из БД с селектовкой по id, причем один так как завязано на урл страницу.
 	detailPost = @db.execute 'select * from Posts where id =?',[postID]
+	# пост переходит в переменную глобальную
 	@row = detailPost[0]
 	erb :detail_post
 
