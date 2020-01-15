@@ -10,6 +10,14 @@
 	<hr/>
 
 	<h3>Comments:</h3>
+	<br>
+	<%@comments.each do |comments|%>
+
+		<p><%=comments['content']%></p>
+		<small style="color:#599">Added at: <%=comments['create_date']%></small>
+	<hr>
+	<% end -%>
+	
 	<p>	
 		<!-- здесь происходит подставка в урл через хэш с помощью ключа id -->
 <form action="/detail_post/<%=@row['id']%>" method="POST" role="form">
