@@ -1,7 +1,8 @@
 <h2>Last posts</h2>
 <br>
 	<%@posts.each do |postsColumn|%>
-	<p><%=postsColumn['content']%>
+	<p>
+		<%=postsColumn['content']%>
 		<br>
 		<a href="/post/<%=postsColumn['id']%>">Comments</a>
 		<br>

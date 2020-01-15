@@ -55,8 +55,13 @@ post '/newPost' do
 					
 	redirect '/'
 end
-
+#вывод информации о посте
 get '/post/:id' do
 	postID = params[:id]
-	erb "inf id #{postID}"
+	detailPost = @db.execute 'select * from Posts where id =?',[postID]
+	@row = detailPost[0]
+	erb :detail_post
+
+	# erb "inf id #{postID}"
+
 end
