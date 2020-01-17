@@ -87,6 +87,8 @@ get '/post/:id' do
 	
 	#
 	@comments = @db.execute 'select * from Comments where postID=? order by id', [postID]
+	
+
 	erb :detail_post
 
 	# erb "inf id #{postID}"
@@ -100,15 +102,20 @@ post '/detail_post/:id' do
 	postID = params[:id]
 
 	# получаем данные из пост запроса через переменную
+
 	commentPost = params[:commentUser]
 				if commentPost.length <= 0
 				@error = 'Input or get away!'		
-				return 
-				end
+				return erb back
+			end
 	
 	@db.execute 'insert into Comments (create_date,content,postID) 
 					values (datetime(), ?,?)', [commentPost, postID]
 	
 	redirect('/post/'+ postID)
 
+end
+
+def back
+redirect('/post/'+ postID)
 end
