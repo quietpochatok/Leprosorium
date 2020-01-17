@@ -95,15 +95,19 @@ end
 
 #обработчик пост запроса, где находится пост
 post '/detail_post/:id' do
-
+	commentPost = params[:commentUser]
 	# получаем значение переменной из урл
 	postID = params[:id]
 
 	# получаем данные из пост запроса через переменную
-	post = params[:postUser]
-
+	commentPost = params[:commentUser]
+				if commentPost.length <= 0
+				@error = 'Input or get away!'		
+				return 
+				end
+	
 	@db.execute 'insert into Comments (create_date,content,postID) 
-					values (datetime(), ?,?)', [post, postID]
+					values (datetime(), ?,?)', [commentPost, postID]
 	
 	redirect('/post/'+ postID)
 
