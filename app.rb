@@ -26,7 +26,8 @@ configure do
 	@db.execute 'CREATE TABLE IF NOT EXISTS "Posts" (
 	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	"create_date"	DATE NOT NULL,
-	"content"	TEXT NOT NULL
+	"content"	TEXT NOT NULL,
+	"userName" TEXT
 	)'
 
 	# создает таблицу если она не суще-етб также не пересоздает таблицу
@@ -36,11 +37,21 @@ configure do
 	"content"	TEXT NOT NULL,
 	"postID" INTEGER
 	)'
+
+
+	# # создает таблицу если она не суще-етб также не пересоздает таблицу
+	# @db.execute 'CREATE TABLE IF NOT EXISTS "author" (
+	# "id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	# "create_date"	DATE NOT NULL,
+	# "content"	TEXT NOT NULL,
+	# "postID" INTEGER,
+
+	# )'
 end
 
 get '/' do
 	@posts = @db.execute 'select * from Posts order by id desc'
-	erb :lastPost
+	erb :lastPostMainmenu
 end
 
 
@@ -54,13 +65,14 @@ post '/newPost' do
 
 	# получаем данные из пост запроса через переменную
 	post = params[:postUser]
+	userName = params[:userName]
 
 			if post.size <= 0
 			@error = 'Input form text or get away!'			
 			return erb :newPost
 			end
-	
-	@db.execute 'insert into Posts (create_date,content) values (datetime(), ?)', [post]
+
+	@db.execute 'insert into Posts (create_date,content,userName) values (datetime(), ?,?)', [post,userName]
 					
 	redirect '/'
 end
