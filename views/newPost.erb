@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
 	<title></title>
@@ -8,10 +7,16 @@
 <p>
 	We will add new post here
 </p>
+
 <form action="/newPost" method="POST" role="form">
   <div class="form-group">
    <textarea name="postUser" class="form-control" rows="10" placeholder="pleez in you text you"></textarea>
    <br>
+ 	 <div class="form-group">
+    <label for="exampleInputName">Введите ваше имя или ник (для отображения при публикации)</label>
+    <input name="userName" type="text" class="form-control" id="exampleInputName" placeholder="Введите ваше имя или ник" value="<%=@userName%>">
+    </div>
+
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </body>
