@@ -2,12 +2,15 @@
 <br>
 	<%@posts.each do |postsColumn|%>
 	<p><%=postsColumn['content']%>
+		<br>
+		<br>
 		Create by: <%=postsColumn['userName']%>
 		<br>
-		<a href="/post/<%=postsColumn['id']%>">Comments</a>
-		<br>
-		<br>
 		Added at: <%=postsColumn['create_date']%>
+
+		<br>
+		<br>
+		<a href="/post/<%=postsColumn['id']%>">Comments</a>
 	</p>
 	<hr/>
  <% end %>
